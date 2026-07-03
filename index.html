@@ -369,6 +369,98 @@
     height: 32px;
     fill: white;
 }
+/* --- SEÇÃO LOJA / CATÁLOGO --- */
+#loja {
+    background-color: var(--bg-primary);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.product-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid #3a302b;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-title {
+    color: var(--gold-light);
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.product-desc {
+    font-size: 14px;
+    color: #aaaaaa;
+    margin-bottom: 20px;
+}
+
+.btn-add-cart {
+    background-color: transparent;
+    color: var(--gold-primary);
+    border: 1px solid var(--gold-primary);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-add-cart:hover {
+    background-color: var(--gold-primary);
+    color: #121212;
+}
+
+/* Barra Flutuante do Carrinho */
+.cart-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-secondary);
+    border-top: 2px solid var(--gold-primary);
+    padding: 15px 10%;
+    display: none; /* Só aparece quando tem item */
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+}
+
+.cart-info-text {
+    color: var(--white);
+    font-size: 16px;
+}
+
+.cart-info-text span {
+    color: var(--gold-primary);
+    font-weight: bold;
+}
+
+.btn-finish-order {
+    background-color: #25d366;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.btn-finish-order:hover {
+    background-color: #20ba5a;
+}
 
         /* Responsividade */
         @media (max-width: 768px) {
@@ -413,6 +505,7 @@
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#dicas">Dicas</a></li>
                 <li><a href="#contato">Contato</a></li>
+                <li><a href="#loja">Loja</a></li>
             </ul>
         </nav>
     </header>
@@ -458,7 +551,55 @@
             Proteja seu condomínio com a Star Controll!
         </div>
     </section>
+<!-- Seção Loja / Catálogo -->
+    <section id="loja">
+        <h2>Catálogo de Soluções</h2>
+        <div class="products-grid">
+            
+            <!-- Produto 1 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Câmera Bullet IP HD</div>
+                    <div class="product-desc">Monitoramento de alta definição com visão noturna infravermelha para áreas externas do condomínio.</div>
+                </div>
+                <button class="btn-add-cart" onclick="adicionarAoCarrinho('Câmera Bullet IP HD')">Adicionar ao Orçamento</button>
+            </div>
 
+            <!-- Produto 2 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Motor de Portão Rápido</div>
+                    <div class="product-desc">Automatização de alta velocidade para portões de fluxo intenso, reduzindo o tempo de espera.</div>
+                </div>
+                <button class="btn-add-cart" onclick="adicionarAoCarrinho('Motor de Portão Rápido')">Adicionar ao Orçamento</button>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Leitor de Biometria / Tag</div>
+                    <div class="product-desc">Controle de acesso moderno para pedestres com tecnologia antifraude e relatórios de entrada.</div>
+                </div>
+                <button class="btn-add-cart" onclick="adicionarAoCarrinho('Leitor de Biometria / Tag')">Adicionar ao Orçamento</button>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="product-card">
+                <div>
+                    <div class="product-title">Central de Interfonia IP</div>
+                    <div class="product-desc">Comunicação digital sem ruídos entre a portaria e os apartamentos, com suporte para aplicativo.</div>
+                </div>
+                <button class="btn-add-cart" onclick="adicionarAoCarrinho('Central de Interfonia IP')">Adicionar ao Orçamento</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Barra Inferior do Carrinho (Fica oculta até o cliente escolher algo) -->
+    <div id="barra-carrinho" class="cart-bar">
+        <div class="cart-info-text">Você selecionou <span id="qtd-itens">0</span> item(ns) para o seu orçamento.</div>
+        <button class="btn-finish-order" onclick="enviarParaWhatsApp()">Pedir Orçamento no WhatsApp 💬</button>
+    </div>
     <section id="sobre">
         <h2>Quem Somos</h2>
         <div class="about-content">
@@ -551,6 +692,55 @@
         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.742.002-2.602-1.005-5.05-2.839-6.886-1.833-1.836-4.271-2.846-6.871-2.847-5.44 0-9.863 4.373-9.867 9.746-.001 1.767.461 3.493 1.339 5.025l-.995 3.637 3.738-.971zm11.367-6.417c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
     </svg>
 </a>
+<!-- Script do Carrinho para o WhatsApp -->
+    <script>
+        // Array que vai guardar os produtos selecionados
+        let carrinho = [];
+
+        function adicionarAoCarrinho(nomeProduto) {
+            // Adiciona o produto na lista
+            carrinho.push(nomeProduto);
+            
+            // Atualiza o contador na barra inferior
+            document.getElementById('qtd-itens').innerText = carrinho.length;
+            
+            // Mostra a barra do carrinho
+            document.getElementById('barra-carrinho').style.display = 'flex';
+            
+            // Alerta visual discreto no botão
+            alert('"' + nomeProduto + '" adicionado à sua lista de orçamento!');
+        }
+
+        function enviarParaWhatsApp() {
+            if (carrinho.length === 0) return;
+
+            // Agrupa os itens para contar se há repetidos (ex: 2x Câmeras)
+            let contagem = {};
+            carrinho.forEach(function(item) {
+                contagem[item] = (contagem[item] || 0) + 1;
+            });
+
+            // Monta o texto da mensagem
+            let numeroWhats = "5561999283285";
+            let texto = "Olá, Star Controll! Gostaria de solicitar um orçamento de instalação para os seguintes itens do catálogo:\n\n";
+            
+            for (let produto in contagem) {
+                texto += "• " + produto + " (Quantidade: " + contagem[produto] + ")\n";
+            }
+            
+            texto += "\nAguardo o retorno para combinarmos a vistoria técnica no condomínio.";
+
+            // Codifica o texto para o padrão de link da internet
+            let linkZap = "https://wa.me/" + numeroWhats + "?text=" + encodeURIComponent(texto);
+            
+            // Limpa o carrinho após enviar (opcional)
+            carrinho = [];
+            document.getElementById('barra-carrinho').style.display = 'none';
+
+            // Abre o WhatsApp
+            window.open(linkZap, '_blank');
+        }
+    </script>
 </body>
 
 </html>
