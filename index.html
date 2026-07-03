@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Controll Sistemas - Segurança Eletrônica para Condomínios</title>
+    <style>
+        /* Configurações Gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #161210; /* Tom marrom bem escuro baseado na logo */
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        :root {
+            --bg-primary: #161210; 
+            --bg-secondary: #221c19; 
+            --text-main: #e5e5e5; 
+            --gold-primary: #d4af37; 
+            --gold-light: #f1e0ac; 
+            --gold-dark: #aa8c2c; 
+            --white: #FFFFFF
+        }
+
+        /* Cabeçalho e Navegação */
+        header {
+            background-color: rgba(22, 18, 16, 0.95);
+            padding: 10px 10%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Espaço da Logo */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 60px; /* Ajuste a altura conforme necessário */
+            width: auto;
+            object-fit: contain;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--gold-light);
+        }
+
+        /* Seção Hero / Início */
+        #inicio {
+            background: linear-gradient(rgba(22, 18, 16, 0.85), rgba(34, 28, 25, 0.95)), url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 120px 20px 80px 20px;
+        }
+
+        #inicio h1 {
+            font-size: 48px;
+            margin-bottom: 25px;
+            max-width: 850px;
+            color: var(--gold-light);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+        }
+
+        #inicio p {
+            font-size: 20px;
+            margin-bottom: 35px;
+            max-width: 650px;
+            color: #cccccc;
+        }
+
+        .btn-cta {
+            background-color: var(--gold-primary);
+            color: #121212; 
+            padding: 18px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 4px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-cta:hover {
+            background-color: var(--gold-light);
+            transform: translateY(-3px);
+        }
+
+        /* Seções */
+        section {
+            padding: 100px 10%;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            color: var(--gold-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--gold-dark);
+            margin: 15px auto 0;
+        }
+
+        /* Serviços */
+        #servicos {
+            background-color: var(--bg-secondary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background-color: var(--bg-primary);
+            padding: 35px;
+            border-radius: 6px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+            border: 1px solid #3a302b;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--gold-light);
+            font-size: 22px;
+        }
+
+        .services-footer {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--white);
+        }
+
+        /* Sobre */
+        #sobre {
+            background-color: var(--bg-primary);
+        }
+
+        .about-content {
+            max-width: 850px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 19px;
+            color: #cccccc;
+        }
+
+        .about-content p {
+            margin-bottom: 25px;
+        }
+
+        /* Dicas */
+        #dicas {
+            background-color: var(--bg-secondary);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .blog-card {
+            background-color: var(--bg-primary);
+            border-radius: 6px;
+            padding: 30px;
+            border: 1px solid #3a302b;
+        }
+
+        .blog-body h3 {
+            margin-bottom: 12px;
+            color: var(--gold-light);
+        }
+
+        .blog-body p {
+            font-size: 15px;
+            color: #aaaaaa;
+            margin-bottom: 20px;
+        }
+
+        .blog-link {
+            color: var(--gold-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Contato */
+        #contato {
+            background-color: var(--bg-primary);
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+
+        .contact-form {
+            flex: 1.2;
+            min-width: 350px;
+            background-color: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 6px;
+            border: 1px solid #3a302b;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold-light);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-primary);
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 16px;
+            color: var(--white);
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--gold-primary);
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .btn-submit {
+            background-color: var(--gold-primary);
+            color: #121212;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--gold-light);
+        }
+
+        .contact-info {
+            flex: 0.8;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-item {
+            margin-bottom: 30px;
+            border-left: 3px solid var(--gold-dark);
+            padding-left: 20px;
+        }
+
+        .info-item h3 {
+            color: var(--gold-primary);
+            margin-bottom: 5px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #0f0c0a;
+            color: #777777;
+            text-align: center;
+            padding: 25px;
+            font-size: 14px;
+            border-top: 1px solid #221c19;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 15px;
+            }
+            nav ul {
+                margin-top: 15px;
+            }
+            nav ul li {
+                margin: 5px 10px;
+            }
+            #inicio h1 {
+                font-size: 34px;
+            }
+            section {
+                padding: 60px 5%;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="/Star control sistemas/logo star marron.jpeg" alt="Star Controll" class="logo-img">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#dicas">Dicas</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <h1>Segurança eletrônica para condomínios com soluções personalizadas e tecnologia de ponta.</h1>
+        <p>Garantindo a tranquilidade e a proteção do seu patrimônio com a agilidade e competência que você precisa.</p>
+        <a href="#contato" class="btn-cta">Solicitar Orçamento Gratuito</a>
+    </section>
+
+    <section id="servicos">
+        <h2>Nossos Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Controle de Acesso</h3>
+                <p>Gerenciamento rigoroso e identificação inteligente de moradores, visitantes e prestadores de serviço.</p>
+            </div>
+            <div class="service-card">
+                <h3>Portão Eletrônico</h3>
+                <p>Automatização rápida e segura para veículos, minimizando o tempo de exposição na entrada.</p>
+            </div>
+            <div class="service-card">
+                <h3>Câmeras de Segurança</h3>
+                <p>Sistemas de CFTV com monitoramento em alta definição para cobertura estratégica de áreas comuns.</p>
+            </div>
+            <div class="service-card">
+                <h3>Interfonia</h3>
+                <p>Comunicação direta, clara e estável entre a portaria, os apartamentos e as áreas externas.</p>
+            </div>
+            <div class="service-card">
+                <h3>Antena Coletiva</h3>
+                <p>Instalação e estruturação de sinal de TV digital coletivo com máxima qualidade para todo o condomínio.</p>
+            </div>
+            <div class="service-card">
+                <h3>Contrato de Manutenção</h3>
+                <p>Suporte preventivo e corretivo contínuo para garantir que todos os equipamentos funcionem 24h sem falhas.</p>
+            </div>
+        </div>
+        <div class="services-footer">
+            Proteja seu condomínio com a Star Controll!
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2>Quem Somos</h2>
+        <div class="about-content">
+            <p>A Star Controll Sistemas foi criada em 2017 com o intuito de proporcionar segurança, confiança e um serviço de excelência aos nossos clientes com maior agilidade e competência.</p>
+            <p>Nossa missão é proteger e conectar pessoas e patrimônios, oferecendo soluções inovadoras e personalizadas em segurança eletrônica. Com uma equipe altamente qualificada e experiente, estamos comprometidos em entregar resultados que superem as expectativas e construam relacionamentos duradouros com nossos clientes.</p>
+        </div>
+    </section>
+
+    <section id="dicas">
+        <h2>Dicas de Segurança</h2>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-body">
+                    <h3>A Importância da Manutenção Preventiva</h3>
+                    <p>Equipamentos de segurança podem falhar quando você mais precisa. Saiba por que o contrato de manutenção preventiva evita vulnerabilidades em condomínios.</p>
+                    <a href="#" class="blog-link">Ler artigo completo →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-body">
+                    <h3>Modernizando o Controle de Acesso</h3>
+                    <p>Uso de biometria, tags veiculares e reconhecimento facial: descubra como a tecnologia reduz drasticamente o risco de invasões nas portarias.</p>
+                    <a href="#" class="blog-link">Ler artigo completo →</a>
+                </div>
+            </div>
+            <div class="blog-card">
+                <div class="blog-body">
+                    <h3>Posicionamento Estratégico de Câmeras</h3>
+                    <p>Não basta ter câmeras, elas precisam estar nos locais certos. Conheça os pontos cegos mais comuns em condomínios e como eliminá-los.</p>
+                    <a href="#" class="blog-link">Ler artigo completo →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <h2>Fale Conosco</h2>
+        <div class="contact-container">
+            <form class="contact-form" action="#" method="POST">
+                <div class="form-group">
+                    <label for="name">Nome / Condomínio</label>
+                    <input type="text" id="name" name="name" required placeholder="Seu nome ou nome do condomínio">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" name="message" required placeholder="Como a Star Controll podemos ajudar o seu condomínio?"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            </form>
+
+            <div class="contact-info">
+                <div class="info-item">
+                    <h3>Telefone</h3>
+                    <p>(61) 99928-3285</p>
+                </div>
+                <div class="info-item">
+                    <h3>E-mail</h3>
+                    <p>uelli29@gmail.com</p>
+                </div>
+                <div class="info-item">
+                    <h3>Endereço</h3>
+                    <p>Quadra 25, Conjunto H, 09</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Star Controll Sistemas. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
